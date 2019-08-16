@@ -108,9 +108,14 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
+load_bash_aliases() {
+    if [ -f $1 ]; then
+        . $1
+    fi
+}
+
+load_bash_aliases ~/.bash_aliases
+load_bash_aliases ~/.bash_tt_aliases
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
