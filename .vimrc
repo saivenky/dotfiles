@@ -36,12 +36,12 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'airblade/vim-gitgutter'
 
 " preview latex live
-Plugin 'xuhdev/vim-latex-live-preview'
+" Plugin 'xuhdev/vim-latex-live-preview'
 
 " markdown live preview
-Plugin 'shime/vim-livedown'
+" Plugin 'shime/vim-livedown'
 
-let g:livedown_browser = 'chrome'
+" let g:livedown_browser = 'chrome'
 
 " Golang Plugins
 " Syntax highlighting, gofmt on save, linting, and more
@@ -67,6 +67,9 @@ let g:livedown_browser = 'chrome'
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
 " Plugin 'ascenator/L9', {'name': 'newL9'}
+
+" colorscheme for Vim 'Tomorrow-Night'
+Plugin 'Ardakilic/vim-tomorrow-night-theme'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
