@@ -2,20 +2,6 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-load_bash_aliases() {
-    if [ -f $1 ]; then
-        . $1
-    fi
-}
-
-load_bash_aliases ~/.bash_aliases
-load_bash_aliases ~/.bash_tt_aliases
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -30,8 +16,8 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=4000
-HISTFILESIZE=8000
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -113,9 +99,12 @@ alias l='ls -CF'
 
 alias tmux='force_color_prompt=1 tmux'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+. ~/.bash_aliases/misc.sh
+. ~/.bash_aliases/python.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -128,18 +117,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
+# change editor
 export EDITOR=vim
+export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-cdone() {
-    paplay /usr/share/sounds/freedesktop/stereo/complete.oga
-}
-
-cowfortune() {
-    cowsay $(fortune)
-}
-
-cowfortune
+# inserts witty saying at the start of the shell
+cowsay $(fortune)

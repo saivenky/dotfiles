@@ -1,9 +1,11 @@
-export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
-export PYTHONSTARTUP=~/.pystartup
-
 alias rebase="git pull --rebase origin master"
 alias ve3="virtualenv -p python3 env"
 alias vac=". ./env/bin/activate"
+alias youtube-dl="python3 -m youtube_dl"
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 daysuntil() {
     d1=$(date +%s)
@@ -29,8 +31,4 @@ fix-hscroll() {
     hscrolldist=`echo $scrolldist | cut -d"," -f2`
     invhscrolldist=`echo "define abs(x) { if (x < 0) return (-x); return (x) }; abs($hscrolldist) * -1" | bc`
     xinput set-prop $touchpadid $scrolldistpropid $vscrolldist, $invhscrolldist
-}
-
-install-ipykernel() {
-    python -m ipykernel install --user --name "$1" --display-name "$2"
 }
