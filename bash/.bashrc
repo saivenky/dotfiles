@@ -117,6 +117,7 @@ try_source() {
 try_source ~/.bash_aliases/misc.sh
 try_source ~/.bash_aliases/python.sh
 # try_source ~/.bash_aliases/ssh.sh
+try_source ~/.bash_aliases/vim.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
