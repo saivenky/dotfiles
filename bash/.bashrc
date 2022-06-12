@@ -105,6 +105,7 @@ alias tmux='force_color_prompt=1 tmux'
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 . ~/.bash_aliases/misc.sh
 . ~/.bash_aliases/python.sh
+# . ~/.bash_aliases/ssh.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
