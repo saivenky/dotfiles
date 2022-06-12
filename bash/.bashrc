@@ -99,13 +99,24 @@ alias l='ls -CF'
 
 alias tmux='force_color_prompt=1 tmux'
 
+try_source() {
+    alias_file=$1
+
+    if [ -f $alias_file ]
+    then
+        . $alias_file
+    else
+        echo "Skipped sourcing $alias_file"
+    fi
+}
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
-. ~/.bash_aliases/misc.sh
-. ~/.bash_aliases/python.sh
-# . ~/.bash_aliases/ssh.sh
+try_source ~/.bash_aliases/misc.sh
+try_source ~/.bash_aliases/python.sh
+# try_source ~/.bash_aliases/ssh.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
