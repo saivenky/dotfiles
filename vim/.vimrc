@@ -96,9 +96,6 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files']
 "Airline config
 " let g:airline#extensions#tabline#enabled = 1
 
-" vdebug config
-let g:vdebug_options = {"path_maps" : {"/srv/thumbtack/code/": "/home/sai/Thumbtack/website/"}}
-
 set tags=./tags,tags;$HOME
 
 syntax on
