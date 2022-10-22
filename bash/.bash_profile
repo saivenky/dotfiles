@@ -1,1 +1,1 @@
-. /home/sai/.bashrc
+. ~/.bashrc
