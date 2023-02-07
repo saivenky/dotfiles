@@ -1,4 +1,5 @@
-alias l='ls -ah --color'
+alias l='ls -Ah --color'
+alias ll='ls -ahl --color'
 
 alias tmux='force_color_prompt=1 tmux'
 

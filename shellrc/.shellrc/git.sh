@@ -1,0 +1,7 @@
+alias gs="git status"
+alias gl="git log"
+alias gd="git diff"
+alias gdw="git diff --word-diff"
+alias ga="git add"
+alias gr="git rebase -i"
+alias gp="git push"

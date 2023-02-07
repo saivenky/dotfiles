@@ -18,14 +18,12 @@ command -v poetry >/dev/null || export PATH="$HOME/.local/bin:$PATH"
 # export PYTHONSTARTUP=~/.pystartup
 
 function venv_activate() {
-    if [ -d .venv ]
+    local env_dirs=(.venv .env)
+    for env_dir in "${env_dirs[@]}"
+    if [ -d "${env_dir}" ]
     then
         source .venv/bin/activate
-    fi
-
-    if [ -d .env ]
-    then
-        source .env/bin/activate
+        exit 0
     fi
 }
 
