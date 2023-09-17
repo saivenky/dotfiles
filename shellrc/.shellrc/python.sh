@@ -17,14 +17,17 @@ command -v poetry >/dev/null || export PATH="$HOME/.local/bin:$PATH"
 # export PYTHONSTARTUP=~/.pythonrc
 # export PYTHONSTARTUP=~/.pystartup
 
-function venv_activate() {
-    local env_dirs=(.venv .env)
+function venv() {
+    local env_dirs=(.venv .env "$1")
     for env_dir in "${env_dirs[@]}"
     if [ -d "${env_dir}" ]
     then
-        source .venv/bin/activate
-        exit 0
+        source ${env_dir}/bin/activate
+        echo "Activated ${env_dir}"
+        return 0
     fi
+
+    return 1
 }
 
 # jupyter
