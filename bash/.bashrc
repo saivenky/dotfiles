@@ -98,6 +98,7 @@ try_source ~/.shellrc/misc.sh
 try_source ~/.shellrc/python.sh
 # try_source ~/.bash_aliases/ssh.sh
 try_source ~/.shellrc/vim.sh
+try_source ~/.shellrc/bin.sh
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile

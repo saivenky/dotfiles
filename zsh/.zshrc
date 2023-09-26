@@ -27,6 +27,7 @@ zstyle ':autocomplete:history-search:*' list-lines 10  # int
 source ~/.shellrc/main.sh
 source ~/.shellrc/brew.sh
 source ~/.shellrc/python.sh
+source ~/.shellrc/bin.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
