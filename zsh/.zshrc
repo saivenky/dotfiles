@@ -24,8 +24,9 @@ zstyle ':autocomplete:*' insert-unambiguous yes
 zstyle ':autocomplete:history-search:*' list-lines 10  # int
 
 
-source ~/.bash_aliases/main.sh
-source ~/.bash_aliases/python.sh
+source ~/.shellrc/main.sh
+source ~/.shellrc/brew.sh
+source ~/.shellrc/python.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
