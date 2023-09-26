@@ -1,11 +1,12 @@
 # Install my personal collection of scripts from:
 # https://github.com/saivenky/bin
 
+install_dir="${HOME}/bin"
+
 function install_bin {
-    local install_dir="${HOME}/bin"
-    echo $install_dir
     if [ -d "${install_dir}" ]; then
         # Already installed
+        update_bin
         return 0
     fi
 
@@ -16,6 +17,14 @@ function install_bin {
     popd
 
     export PATH="${PATH}:${install_dir}"
+}
+
+function update_bin {
+    pushd "${install_dir}"
+    git fetch origin/main
+    git rebase origin/main
+    ./setup.sh install
+    popd
 }
 
 install_bin
