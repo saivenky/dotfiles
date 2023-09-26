@@ -6,7 +6,7 @@ install_dir="${HOME}/bin"
 function install_bin {
     if [ -d "${install_dir}" ]; then
         # Already installed
-        update_bin
+        update_bin > /dev/null
         return 0
     fi
 
@@ -21,7 +21,7 @@ function install_bin {
 
 function update_bin {
     pushd "${install_dir}"
-    git fetch origin/main
+    git fetch
     git rebase origin/main
     ./setup.sh install
     popd
