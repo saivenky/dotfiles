@@ -4,9 +4,15 @@
 install_dir="${HOME}/bin"
 
 function install_bin {
+    _install_bin
+    _update_bin > /dev/null
+
+    export PATH="${PATH}:${install_dir}"
+}
+
+function _install_bin {
     if [ -d "${install_dir}" ]; then
         # Already installed
-        update_bin > /dev/null
         return 0
     fi
 
@@ -16,10 +22,9 @@ function install_bin {
     ./setup.sh install
     popd
 
-    export PATH="${PATH}:${install_dir}"
 }
 
-function update_bin {
+function _update_bin {
     pushd "${install_dir}"
     git fetch
     git rebase origin/main
