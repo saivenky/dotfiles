@@ -25,6 +25,7 @@ zstyle ':autocomplete:history-search:*' list-lines 10  # int
 
 
 source ~/.shellrc/main.sh
+source ~/.shellrc/datetime.sh
 source ~/.shellrc/brew.sh
 source ~/.shellrc/python.sh
 source ~/.shellrc/bin.sh
