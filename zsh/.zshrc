@@ -13,16 +13,31 @@ then
 fi
 source ~/.zsh/powerlevel10k/powerlevel10k.zsh-theme
 
+# Install zsh-autocomplete
 if ! [ -d ~/.zsh/zsh-autocomplete ]
 then
     echo "Downloading zsh-autocomplete"
     git clone --depth 1 -- https://github.com/marlonrichert/zsh-autocomplete.git
 fi
+
+# Configure zsh-autocomplete
 source ~/.zsh/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-zstyle ':autocomplete:*' min-delay 1.0  # seconds (float)
+zstyle ':autocomplete:*' min-delay 0.4  # seconds (float)
 zstyle ':autocomplete:*' insert-unambiguous yes
 zstyle ':autocomplete:history-search:*' list-lines 10  # int
+# Makes Enter submit the line
+bindkey -M menuselect '\r' .accept-line
 
+# Install zsh-autosuggestions
+if ! [ -d ~/.zsh/zsh-autosuggestions ]
+then
+    echo "Downloading zsh-autosuggestions"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+fi
+
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Make Tab accept the current suggestion
+bindkey '\t' autosuggest-accept
 
 source ~/.shellrc/main.sh
 source ~/.shellrc/datetime.sh

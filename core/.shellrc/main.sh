@@ -16,3 +16,5 @@ try_source() {
 
 # change editor
 export EDITOR=vim
+
+alias gwdiff='git diff --word-diff --no-index --'

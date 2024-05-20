@@ -1,3 +1,5 @@
+[core]
+    pager = delta
 [init]
 	defaultBranch = main
 [push]
@@ -9,3 +11,8 @@
 	r10 = rebase -i HEAD~10
 	create = !git checkout main && git fetch && git checkout -b
 	word-diff = diff --word-diff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
