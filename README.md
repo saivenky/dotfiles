@@ -4,27 +4,21 @@
 
 From `~` run:
 ```
-git clone <this repo URL> .dotfiles
+git clone git@github.com:saivenky/dotfiles.git .dotfiles
 ```
 
-Use in conjunction with GNU `stow`. If not installed on your system:
+Use with GNU `stow`. If not installed on your system:
 ```
+# Ubuntu/Debian
 sudo apt-get install stow
+
+# Homebrew
+brew install stow
 ```
 
 ## Usage (and Explanation)
 
-### Single Customization
-
-The repo is organized so that you can customize what dotfiles you want to
-include based on your system. For example, if you only want the `bash`-related
-dotfiles:
-
-* Run `stow bash` from the root of the `dotfiles` repo folder.
-
-### All Customizations
-
-Run `stow */` from the root of the `dotfiles` repo folder.
+Run `stow .` from the root of the `dotfiles` repo folder.
 
 ### Explanation
 
@@ -46,4 +40,3 @@ But you could also run the very explicit version (assuming your dotfiles repo is
 ```
 stow xyz --dir=~/.dotfiles --target=~
 ```
-
