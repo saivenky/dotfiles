@@ -23,3 +23,8 @@ function randtime() {
     rand_time=$(shuf -i $d1-$d2 -n 1)
     gnu_date -d @$rand_time
 }
+
+command -v git-filter-repo &>/dev/null
+if [ $? -ne 0 ]; then
+    curl -o $HOME/.local/bin/git-filter-repo https://raw.githubusercontent.com/newren/git-filter-repo/main/git-filter-repo
+fi
