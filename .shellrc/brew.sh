@@ -2,26 +2,20 @@ command -v brew &>/dev/null
 
 BREW_INSTALLED=$?
 
-if [ $BREW_INSTALLED -eq 0 ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-else
-    echo "Skipping loading brew.sh"
+if [ $BREW_INSTALLED -ne 0 ]; then
+    print "Install Homebrew and then run 'dotfiles_brew_sync'.\n"
+    return 1
 fi
 
-function install_direnv() {
-    command -v direnv &> /dev/null
-    local direnv_installed=$?
+export DOTFILES_BREW_PACKAGES=(
+    direnv
+)
 
-    if [ $direnv_installed -eq 0 ]; then
-        eval "$(direnv hook zsh)"
-        return 0
-    fi
-
-    read -p "Install direnv (y/n)? " yn
-    case $yn in
-        [Yy]* ) brew install direnv; break;;
-        * ) return 0;;
-    esac
+function dotfiles_brew_sync() {
+    brew update
+    brew upgrade
+    brew install $DOTFILES_BREW_PACKAGES
 }
 
-install_direnv
+# Hook for direnv
+eval "$(direnv hook zsh)"

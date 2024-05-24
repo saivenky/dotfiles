@@ -1,3 +1,15 @@
+# If module not enabled, skip everything
+if [ ${DOTFILES_SCRIPTS_ENABLED-0} -ne 1 ]; then
+    return 1
+fi
+
+# First pass, just add to the needed brew deps
+if [ ${DOTFILES_SCRIPTS_BREW_DEPS-0} -ne 1 ]; then
+    # No brew deps needed
+    export DOTFILES_SCRIPTS_BREW_DEPS=1
+    return 1
+fi
+
 # Install my personal collection of scripts from:
 # https://github.com/saivenky/bin
 
@@ -32,4 +44,4 @@ function _update_bin {
     popd
 }
 
-install_bin
+#install_bin

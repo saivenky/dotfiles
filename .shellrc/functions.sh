@@ -1,4 +1,4 @@
-
+# Date and time
 function gnu_date() {
   gnu_date_exists=$(command -v gdate)
   if [ -n "${gnu_date_exists}" ]; then

@@ -1,22 +1,25 @@
-# pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-command -v pyenv >/dev/null
-pyenv_installed=$?
-if [ $pyenv_installed -eq 0 ]
-then
-    eval "$(pyenv init -)"
-else
-    echo "Skipping aliases for pyenv (not installed)"
+# If module not enabled, skip everything
+if [ ${DOTFILES_PYTHON_ENABLED-0} -ne 1 ]; then
+    return 1
 fi
 
-# poetry
-command -v poetry >/dev/null || export PATH="$HOME/.local/bin:$PATH"
+# First pass, just add to the needed brew deps
+if [ ${DOTFILES_PYTHON_BREW_DEPS-0} -ne 1 ]; then
+    DOTFILES_BREW_PACKAGES+=(
+        poetry
+        pyenv
+    )
+    export DOTFILES_PYTHON_BREW_DEPS=1
+    return 1
+fi
 
-# Python Autocompletion
-# export PYTHONSTARTUP=~/.pythonrc
-# export PYTHONSTARTUP=~/.pystartup
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 
+# Functions
+# Activate virtual environment
 function venv() {
     local env_dirs=(.venv .env "$1")
     for env_dir in "${env_dirs[@]}"
