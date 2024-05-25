@@ -1,6 +1,5 @@
 # Check for Homebrew and halt if not installed
 source $HOME/.shellrc/brew.sh
-BREW_INSTALLED=$?
 
 export DOTFILES_PYTHON_ENABLED=1
 export DOTFILES_VIM_ENABLED=1
@@ -10,7 +9,7 @@ source $HOME/.shellrc/python.sh;
 source $HOME/.shellrc/vim.sh; 
 source $HOME/.shellrc/scripts.sh; 
 
-if [ $BREW_INSTALLED -ne 0 ] ; then
+if [ ${BREW_INSTALLED-1} -ne 0 ] ; then
     return 1
 fi
 
@@ -37,8 +36,9 @@ zstyle ':autocomplete:history-search:*' list-lines 10  # int
 bindkey -M menuselect '\r' .accept-line
 
 # Configure zsh plugin: zsh-autosuggestions
-# Make Tab accept the current suggestion
-bindkey '\t' autosuggest-accept
+# Press Tab twice to accept the current suggestion
+# Single tab doesn't seem to work
+bindkey '\t\t' autosuggest-accept
 
 # Aliases
 alias l='ls -Ah --color'
@@ -53,6 +53,22 @@ source ~/.shellrc/functions.sh
 source ~/.shellrc/python.sh
 source ~/.shellrc/vim.sh
 source ~/.shellrc/scripts.sh
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
+
+# Shell integrations
+source ~/.shellrc/brew.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
