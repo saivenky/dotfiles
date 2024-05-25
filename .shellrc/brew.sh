@@ -14,9 +14,9 @@ function dotfiles_brew_sync() {
 
 if [ ${DOTFILES_BREW_DEPS-0} -ne 1 ]; then
     export DOTFILES_BREW_PACKAGES=(
-        delta
         direnv
         fzf
+        git-delta
         zoxide
     )
     export DOTFILES_BREW_DEPS=1
