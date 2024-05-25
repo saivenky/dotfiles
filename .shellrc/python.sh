@@ -6,6 +6,7 @@ fi
 # First pass, just add to the needed brew deps
 if [ ${DOTFILES_PYTHON_BREW_DEPS-0} -ne 1 ]; then
     DOTFILES_BREW_PACKAGES+=(
+        pipx
         poetry
         pyenv
     )
