@@ -1,16 +1,12 @@
+#!/bin/bash
+# Personal scripts module
+
 # If module not enabled, skip everything
 if [ ${DOTFILES_SCRIPTS_ENABLED-0} -ne 1 ]; then
-    return 1
+    return 0
 fi
 
-# First pass, just add to the needed brew deps
-if [ ${DOTFILES_SCRIPTS_BREW_DEPS-0} -ne 1 ]; then
-    # No brew deps needed
-    export DOTFILES_SCRIPTS_BREW_DEPS=1
-    return 1
-fi
-
-# Install my personal collection of scripts from:
+# Install personal collection of scripts from:
 # https://github.com/saivenky/bin
 
 install_dir="${HOME}/bin"
@@ -18,7 +14,6 @@ install_dir="${HOME}/bin"
 function install_bin {
     _install_bin
     _update_bin > /dev/null
-
     export PATH="${PATH}:${install_dir}"
 }
 
@@ -30,18 +25,18 @@ function _install_bin {
 
     echo "Install saivenky/bin..."
     git clone git@github.com:saivenky/bin.git "${install_dir}"
-    pushd "${install_dir}"
+    pushd "${install_dir}" || return 1
     ./setup.sh install
-    popd
-
+    popd || return 1
 }
 
 function _update_bin {
-    pushd "${install_dir}"
+    pushd "${install_dir}" || return 1
     git fetch
     git rebase origin/main
     ./setup.sh install
-    popd
+    popd || return 1
 }
 
+# Uncomment to auto-install
 #install_bin
