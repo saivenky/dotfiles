@@ -89,20 +89,41 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-try_source ~/.shellrc/main.sh
-try_source ~/.shellrc/misc.sh
-try_source ~/.shellrc/python.sh
-# try_source ~/.bash_aliases/ssh.sh
-try_source ~/.shellrc/vim.sh
-try_source ~/.shellrc/bin.sh
+# ============================================================================
+# Feature Flags - Control which modules are enabled
+# ============================================================================
+export DOTFILES_PYTHON_ENABLED=1
+export DOTFILES_VIM_ENABLED=1
+export DOTFILES_SCRIPTS_ENABLED=0
+export DOTFILES_JAVA_ENABLED=0
+export DOTFILES_ANDROID_ENABLED=0
+export DOTFILES_RUBY_ENABLED=0
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
+# ============================================================================
+# Shell Utilities
+# ============================================================================
+source "$HOME/.shellrc/shell_utils.sh"
+
+# ============================================================================
+# Core Infrastructure - Load dependencies and brew tools
+# ============================================================================
+shell_source "$HOME/.shellrc/dependencies.sh"
+shell_source "$HOME/.shellrc/brew.sh"
+
+# ============================================================================
+# Module Loading - Feature-specific configurations
+# ============================================================================
+shell_source "$HOME/.shellrc/mod-python.sh"
+shell_source "$HOME/.shellrc/mod-vim.sh"
+shell_source "$HOME/.shellrc/mod-scripts.sh"
+shell_source "$HOME/.shellrc/mod-java.sh"
+shell_source "$HOME/.shellrc/mod-android.sh"
+shell_source "$HOME/.shellrc/mod-ruby.sh"
+shell_source "$HOME/.shellrc/functions.sh"
+
+# ============================================================================
+# Bash Completion
+# ============================================================================
 if ! shopt -oq posix; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
@@ -113,5 +134,5 @@ fi
 
 export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
-# inserts witty saying at the start of the shell
-cowsay $(fortune)
+# Witty saying at shell start (if available)
+command -v cowsay >/dev/null 2>&1 && command -v fortune >/dev/null 2>&1 && cowsay "$(fortune)"
