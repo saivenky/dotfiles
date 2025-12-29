@@ -1,22 +1,45 @@
-# Check for Homebrew and halt if not installed
-source $HOME/.shellrc/brew.sh
+#!/bin/zsh
+# ZSH configuration
 
+# ============================================================================
+# Feature Flags - Control which modules are enabled
+# ============================================================================
 export DOTFILES_PYTHON_ENABLED=1
 export DOTFILES_VIM_ENABLED=1
 export DOTFILES_SCRIPTS_ENABLED=0
+export DOTFILES_JAVA_ENABLED=1
+export DOTFILES_ANDROID_ENABLED=1
+export DOTFILES_RUBY_ENABLED=1
 
-source $HOME/.shellrc/python.sh; 
-source $HOME/.shellrc/vim.sh; 
-source $HOME/.shellrc/scripts.sh; 
+# ============================================================================
+# Core Infrastructure - Load dependencies and brew tools
+# ============================================================================
+source "$HOME/.shellrc/dependencies.sh"
+source "$HOME/.shellrc/brew.sh"
 
-if [ ${BREW_INSTALLED-1} -ne 0 ] ; then
-    return 1
+# Check if Homebrew is installed before proceeding
+if [ "${BREW_INSTALLED:-1}" -ne 0 ]; then
+    printf "Homebrew not installed. Some features will be unavailable.\n"
 fi
 
-# Zsh plugins
+# ============================================================================
+# Module Loading - Feature-specific configurations
+# ============================================================================
+source "$HOME/.shellrc/mod-python.sh"
+source "$HOME/.shellrc/mod-vim.sh"
+source "$HOME/.shellrc/mod-scripts.sh"
+source "$HOME/.shellrc/mod-java.sh"
+source "$HOME/.shellrc/mod-android.sh"
+source "$HOME/.shellrc/mod-ruby.sh"
+source "$HOME/.shellrc/functions.sh"
+
+# ============================================================================
+# ZSH-Specific Configuration
+# ============================================================================
+
 # Zinit plugin manager
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d $ZINIT_HOME ]; then
+if [ ! -d "$ZINIT_HOME" ]; then
     mkdir -p "$(dirname $ZINIT_HOME)"
     git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
@@ -40,21 +63,7 @@ bindkey -M menuselect '\r' .accept-line
 # Single tab doesn't seem to work
 bindkey '\t\t' autosuggest-accept
 
-# Aliases
-alias l='ls -Ah --color'
-alias ll='ls -ahl --color'
-alias tmux='force_color_prompt=1 tmux'
-alias gwdiff='git diff --word-diff --no-index --'
-
-# Functions
-source ~/.shellrc/functions.sh
-
-# Optional parts of zshrc
-source ~/.shellrc/python.sh
-source ~/.shellrc/vim.sh
-source ~/.shellrc/scripts.sh
-
-# History
+# History configuration
 HISTSIZE=5000
 HISTFILE=~/.zsh_history
 SAVEHIST=$HISTSIZE
@@ -67,8 +76,16 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-# Shell integrations
-source ~/.shellrc/brew.sh
+# ============================================================================
+# Aliases
+# ============================================================================
+alias l='ls -Ah --color'
+alias ll='ls -ahl --color'
+alias tmux='force_color_prompt=1 tmux'
+alias gwdiff='git diff --word-diff --no-index --'
+alias cl=claude
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+# ============================================================================
+# Powerlevel10k Theme
+# ============================================================================
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
