@@ -1,0 +1,23 @@
+# Stow ignore patterns (Perl regex)
+# https://www.gnu.org/software/stow/manual/html_node/Types-And-Syntax-Of-Ignore-Lists.html
+
+# Version control
+\.git
+\.gitignore
+\.gitattributes
+\.gitmodules
+
+# Documentation (stow defaults)
+RCS
+CVS
+\.svn
+^/README.*
+^/LICENSE.*
+^/COPYING
+
+# Backup files
+~$
+\.#.*
+
+# macOS
+\.DS_Store
