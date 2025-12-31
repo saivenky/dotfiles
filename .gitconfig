@@ -1,0 +1,15 @@
+[core]
+    pager = delta
+[init]
+	defaultBranch = main
+[push]
+	default = current
+[alias]
+	co = checkout
+	fix = commit -a --amend --no-edit
+	rebase = rebase -i HEAD~10
+	r10 = rebase -i HEAD~10
+	create = !git checkout main && git fetch && git checkout -b
+	wdiff = diff --word-diff
+[include]
+	path = ~/.gitconfig.local

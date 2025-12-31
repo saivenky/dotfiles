@@ -136,3 +136,12 @@ export PROMPT_COMMAND="history -a;$PROMPT_COMMAND"
 
 # Witty saying at shell start (if available)
 command -v cowsay >/dev/null 2>&1 && command -v fortune >/dev/null 2>&1 && cowsay "$(fortune)"
+
+# ============================================================================
+# Machine-Specific Configuration
+# ============================================================================
+# Load common machine-specific settings
+[ -f ~/.shellrc/local.sh ] && source ~/.shellrc/local.sh
+
+# Load bash-specific machine-specific settings
+[ -f ~/.bashrc.local ] && source ~/.bashrc.local

@@ -89,3 +89,12 @@ alias cl=claude
 # Powerlevel10k Theme
 # ============================================================================
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# ============================================================================
+# Machine-Specific Configuration
+# ============================================================================
+# Load common machine-specific settings
+[ -f ~/.shellrc/local.sh ] && source ~/.shellrc/local.sh
+
+# Load zsh-specific machine-specific settings
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
